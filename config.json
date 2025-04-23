@@ -1,0 +1,80 @@
+{
+    "Tls": {
+      "CertificateBase64": "base64-encoded-cert-data",
+      "CertificatePassword": "your-cert-password"
+    },
+    "Routes": [
+      {
+        "PathRegex": "^/api",
+        "RateLimitPerMinute": 30,
+        "LoadBalancing": "WeightedRoundRobin",
+        "StickySession": {
+          "Enabled": true,
+          "Strategy": "Cookie",
+          "CookieName": "STICKY"
+        },
+        "RetryPolicy": {
+          "MaxRetries": 2,
+          "RetryDelayMs": 250
+        },
+        "CircuitBreaker": {
+          "FailureThreshold": 5,
+          "OpenPeriodSeconds": 30
+        },
+        "Targets": [
+          {
+            "Url": "http://localhost:5001",
+            "Weight": 3,
+            "HealthCheck": {
+              "Type": "http",
+              "Path": "/health",
+              "IntervalSeconds": 10
+            }
+          },
+          {
+            "Url": "http://localhost:5002",
+            "Weight": 1,
+            "HealthCheck": {
+              "Type": "tcp",
+              "IntervalSeconds": 10
+            }
+          }
+        ]
+      },
+      {
+        "PathRegex": "^/admin",
+        "RateLimitPerMinute": 30,
+        "LoadBalancing": "RoundRobin",
+        "Targets": [
+          {
+            "Url": "http://localhost:6001",
+            "Weight": 1
+          },
+          {
+            "Url": "http://localhost:6002",
+            "Weight": 1
+          }
+        ]
+      },
+      {
+        "PathRegex": "^/grpc/.*",
+        "LoadBalancing": "RoundRobin",
+        "GrpcConfig": {
+          "MaxMessageSize": 4194304,
+          "EnableCompression": true,
+          "KeepAliveInterval": 60
+        },
+        "Targets": [
+          {
+            "Url": "https://grpc-backend:50051",
+            "Weight": 1,
+            "HealthCheck": {
+              "Type": "grpc",
+              "Path": "/grpc.health.v1.Health/Check",
+              "IntervalSeconds": 10
+            }
+          }
+        ]
+      }
+    ]
+  }
