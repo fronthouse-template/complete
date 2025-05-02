@@ -1,8 +1,4 @@
 {
-    "Tls": {
-      "CertificateBase64": "base64-encoded-cert-data",
-      "CertificatePassword": "your-cert-password"
-    },
     "Redis": {
         "ConnectionString": "redis://localhost:6379"
     },
