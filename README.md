@@ -1,3 +1,17 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  🌐 Visit https://fronthouse.io for more information!                       ║
+║                                                                              ║
+║  Get started with our cloud platform, documentation, pricing, and support.   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+
+> ## 🌐 **For the latest documentation, cloud platform access, and support, visit [fronthouse.io](https://fronthouse.io)**
+
+---
+
 # 🏠 FrontHouseClient
 
 **FrontHouseClient** is a modular, high-performance reverse proxy with smart request filtering, rate limiting, mTLS support, and adaptive behavior based on real-time analytics. Built for privacy-aware routing, resilience to abuse, and observability across distributed environments.
